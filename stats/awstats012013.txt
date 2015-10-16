@@ -1,0 +1,321 @@
+AWSTATS DATA FILE 6.9 (build 1.925)
+# If you remove this file, all statistics for date 201301 will be lost/reset.
+
+# Position (offset in bytes) in this file of beginning of each section for
+# direct I/O access. If you made changes somewhere in this file, you should
+# also remove completely the MAP section (AWStats will rewrite it at next
+# update).
+BEGIN_MAP 27
+POS_GENERAL 1864                
+POS_TIME 2539                
+POS_VISITOR 6898                
+POS_DAY 8022                
+POS_DOMAIN 3237                
+POS_LOGIN 3468                
+POS_ROBOT 3657                
+POS_WORMS 4252                
+POS_EMAILSENDER 4383                
+POS_EMAILRECEIVER 4526                
+POS_SESSION 8292                
+POS_SIDER 8480                
+POS_FILETYPES 4661                
+POS_OS 4798                
+POS_BROWSER 4906                
+POS_SCREENSIZE 5127                
+POS_UNKNOWNREFERER 5201                
+POS_UNKNOWNREFERERBROWSER 5342                
+POS_ORIGIN 5424                
+POS_SEREFERRALS 5561                
+POS_PAGEREFS 5716                
+POS_SEARCHWORDS 6143                
+POS_KEYWORDS 6346                
+POS_MISC 2203                
+POS_ERRORS 6441                
+POS_CLUSTER 3324                
+POS_SIDER_404 6557                
+END_MAP
+
+# LastLine    = Date of last record processed - Last record line number in last log - Last record offset in last log - Last record signature value
+# FirstTime   = Date of first visit for history file
+# LastTime    = Date of last visit for history file
+# LastUpdate  = Date of last update - Nb of parsed records - Nb of parsed old records - Nb of parsed new records - Nb of parsed corrupted - Nb of parsed dropped
+# TotalVisits = Number of visits
+# TotalUnique = Number of unique visitors
+# MonthHostsKnown   = Number of hosts known
+# MonthHostsUnKnown = Number of hosts unknown
+BEGIN_GENERAL 8
+LastLine 20130109072232 2207 499605 0
+FirstTime 20130101170704
+LastTime 20130109072226
+LastUpdate 20130109082851 2207 2065 142 0 0
+TotalVisits 33                  
+TotalUnique 25                  
+MonthHostsKnown 0                   
+MonthHostsUnknown 26                  
+END_GENERAL
+
+# Misc ID - Pages - Hits - Bandwidth
+BEGIN_MISC 10
+QuickTimeSupport 0 0 0
+JavaEnabled 0 0 0
+JavascriptDisabled 0 0 0
+PDFSupport 0 0 0
+WindowsMediaPlayerSupport 0 0 0
+AddToFavourites 0 7 0
+RealPlayerSupport 0 0 0
+TotalMisc 0 0 0
+DirectorSupport 0 0 0
+FlashSupport 0 0 0
+END_MISC
+
+# Hour - Pages - Hits - Bandwidth - Not viewed Pages - Not viewed Hits - Not viewed Bandwidth
+BEGIN_TIME 24
+0 4 4 101375 6 53 39433
+1 1 1 3087 10 10 21580
+2 0 0 0 6 6 8451
+3 0 0 0 3 3 7593
+4 0 0 0 11 12 727447
+5 13 22 1727747 3 3 4595
+6 0 0 0 31 31 33090
+7 1 3 818685 17 17 61061
+8 2 6 1637370 5 5 8155
+9 0 0 0 9 9 16812
+10 0 0 0 4 4 6282
+11 13 28 1787509 12 86 73172
+12 14 56 1975051 15 97 82110
+13 8 22 1721624 15 16 137269
+14 14 63 1154228 11 12 33422
+15 10 19 1095746 6 6 11597
+16 3 10 862776 18 18 65870
+17 9 29 2465246 7 7 18140
+18 4 11 860153 4 4 7479
+19 5 12 863073 9 9 20213
+20 13 20 1747329 21 67 134401
+21 0 0 0 9 9 24047
+22 0 0 0 5 6 11530
+23 14 14 145947 7 48 40036
+END_TIME
+
+# Domain - Pages - Hits - Bandwidth
+# The 10 first Pages must be first (order not required for others)
+BEGIN_DOMAIN 1
+ip 128 320 18966946
+END_DOMAIN
+
+# Cluster ID - Pages - Hits - Bandwidth
+BEGIN_CLUSTER 0
+END_CLUSTER
+
+# Login - Pages - Hits - Bandwidth - Last visit
+# The 10 first Pages must be first (order not required for others)
+BEGIN_LOGIN 1
+ivanlab 5 87 93362 20130108141939
+END_LOGIN
+
+# Robot ID - Hits - Bandwidth - Last visit - Hits on robots.txt
+# The 10 first Hits must be first (order not required for others)
+BEGIN_ROBOT 13
+baiduspider 29 60769 20130108120618 0
+robot 24 58599 20130108122944 0
+crawl 24 130958 20130109072028 0
+bot[+:,\.\;\/\\-] 23 36675 20130108094326 0
+googlebot 22 74064 20130108171217 0
+yandex 15 29839 20130109052259 0
+turnitinbot 14 0 20130109063034 0
+sogou 6 0 20130108004707 0
+[+:,\.\;\/\\-]bot 4 25041 20130107115839 0
+msnbot\-media 3 823231 20130108141455 0
+no_user_agent 2 580 20130107225340 0
+surveybot 1 1973 20130107010411 0
+spider 2 2237 20130104195211 0
+END_ROBOT
+
+# Worm ID - Hits - Bandwidth - Last visit
+# The 5 first Hits must be first (order not required for others)
+BEGIN_WORMS 0
+END_WORMS
+
+# EMail - Hits - Bandwidth - Last visit
+# The 20 first Hits must be first (order not required for others)
+BEGIN_EMAILSENDER 0
+END_EMAILSENDER
+
+# EMail - Hits - Bandwidth - Last visit
+# The 20 first hits must be first (order not required for others)
+BEGIN_EMAILRECEIVER 0
+END_EMAILRECEIVER
+
+# Files type - Hits - Bandwidth - Bandwidth without compression - Bandwidth after compression
+BEGIN_FILETYPES 5
+png 80 73176 0 0
+html 82 272658 0 0
+jpg 110 17413148 0 0
+pl 46 1207052 0 0
+gif 2 912 0 0
+END_FILETYPES
+
+# OS ID - Hits
+BEGIN_OS 7
+winme 1
+macosx 178
+winxp 65
+Unknown 1
+winvista 1
+linux 11
+win2008 63
+END_OS
+
+# Browser ID - Hits
+BEGIN_BROWSER 13
+msie6.0 1
+msie8.0 30
+firefox13.0.1 53
+mozilla 1
+firefox17.0 65
+chrome 16
+firefox14.0.1 31
+msie7.0 20
+firefox16.0 9
+firefox6.0 1
+firefox3.6.12 12
+firefox9.0.1 1
+safari 80
+END_BROWSER
+
+# Screen size - Hits
+BEGIN_SCREENSIZE 0
+END_SCREENSIZE
+
+# Unknown referer OS - Last visit date
+BEGIN_UNKNOWNREFERER 1
+Mozilla/3.0_(compatible;_Indy_Library) 20130108205613
+END_UNKNOWNREFERER
+
+# Unknown referer Browser - Last visit date
+BEGIN_UNKNOWNREFERERBROWSER 0
+END_UNKNOWNREFERERBROWSER
+
+# Origin - Pages - Hits 
+BEGIN_ORIGIN 6
+From0 26 27
+From1 1 1
+From2 7 7
+From3 16 16
+From4 78 269
+From5 0 0
+END_ORIGIN
+
+# Search engine referers ID - Pages - Hits
+BEGIN_SEREFERRALS 1
+google 7 7
+END_SEREFERRALS
+
+# External page referers - Pages - Hits
+# The 10 first Pages must be first (order not required for others)
+BEGIN_PAGEREFS 5
+http://www.anatomy.uci.edu/soltesz.html 10 10
+http://www.fatcow.com/controlpanel/VisitorStats.bml 3 3
+http://www.uci.edu/features/2012/01/feature_soltesz_120130.php 1 1
+http://www.robertson-group.com/anat_2012_test/soltesz.html 1 1
+http://www.anatomy.uci.edu/solteszres.html 1 1
+END_PAGEREFS
+
+# Search keyphrases - Number of search
+# The 10 first number of search must be first (order not required for others)
+BEGIN_SEARCHWORDS 3
+ivan+soltesz+lab 1
+soltesz+lab 1
+ivan+marchionni 1
+END_SEARCHWORDS
+
+# Search keywords - Number of search
+# The 10 first number of search must be first (order not required for others)
+BEGIN_KEYWORDS 4
+lab 2
+soltesz 2
+ivan 2
+marchionni 1
+END_KEYWORDS
+
+# Errors - Hits - Bandwidth
+BEGIN_ERRORS 3
+401 16 9427
+302 292 194461
+404 61 145931
+END_ERRORS
+
+# URL with 404 errors - Hits - Last URL referer
+BEGIN_SIDER_404 2
+/robots.txt 60 -
+/1640.html 1 -
+END_SIDER_404
+
+# Host - Pages - Hits - Bandwidth - Last visit date - [Start date of last visit] - [Last page of last visit]
+# [Start date of last visit] and [Last page of last visit] are saved only if session is not finished
+# The 10 first Hits must be first (order not required for others)
+BEGIN_VISITOR 26
+208.127.225.178 52 140 2045637 20130108141937
+69.58.178.56 9 9 49310 20130104231822
+85.114.133.32 8 8 47417 20130102053634
+128.206.77.41 8 15 871754 20130108170319
+128.200.155.189 6 19 1607709 20130102133423
+74.101.113.247 5 12 863073 20130104190723
+68.111.151.65 5 12 863229 20130101171312
+193.175.154.19 4 12 3274740 20130109072226 20130109072226 /
+128.200.155.181 4 11 860153 20130102183502
+178.192.86.30 3 5 824279 20130106054046
+128.200.12.175 2 9 856051 20130104134949
+24.38.219.52 0 1 707857 
+5.9.35.43 1 1 4309 20130108205613
+50.57.190.113 1 1 4309 20130107150733
+192.231.71.2 2 9 856051 20130102160859
+128.200.12.186 2 3 112685 20130108170746
+137.187.241.7 3 10 859516 20130104143507
+131.253.24.153 1 1 3087 20130109014804
+85.25.154.15 1 1 1973 20130104175036
+128.200.155.196 3 10 857908 20130107125403
+50.17.47.188 1 1 4309 20130101204320
+151.25.177.183 1 7 745223 20130102114817
+94.23.220.161 1 1 6725 20130103162725
+128.200.12.168 2 10 964906 20130108153209
+89.137.123.124 1 3 818685 20130105125143
+134.58.253.57 2 9 856051 20130107053513
+END_VISITOR
+
+# Date - Pages - Hits - Bandwidth - Visits
+BEGIN_DAY 9
+20130101 6 13 867538 2
+20130102 22 57 4935238 6
+20130103 33 79 1559638 3
+20130104 25 46 2726560 6
+20130105 5 7 920060 2
+20130106 3 6 1532136 1
+20130107 7 23 2536953 4
+20130108 25 85 3067051 7
+20130109 2 4 821772 2
+END_DAY
+
+# Session range - Number of visits
+BEGIN_SESSION 5
+5mn-15mn 1
+30s-2mn 6
+2mn-5mn 4
+0s-30s 20
+30mn-1h 1
+END_SESSION
+
+# URL - Pages - Bandwidth - Entry - Exit
+# The 10 first Pages must be first (order not required for others)
+BEGIN_SIDER 11
+/stats/awstats/cgi-bin/awstats.pl 46 1207052 4 4
+/ 29 73569 23 9
+/people.html 17 63995 3 9
+/research.html 7 19517 0 1
+/modeling.html 7 35834 2 4
+/programs.html 6 17980 0 2
+/publications.html 6 29016 0 2
+/contactus.html 5 13473 0 1
+/stats/ 3 2761 1 0
+/stats/usage_201210.html 1 8361 0 0
+/stats/usage_201212.html 1 8152 0 0
+END_SIDER

@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="en">
+<link rel="stylesheet" type="text/css" href="./css/prototip.css" />
+<link rel="stylesheet" type="text/css" href="./css/myqa.css" />
+
+    <head>
+        <meta charset="utf-8">
+        <title>Quantitative Assessment</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/prototype/1.7.1.0/prototype.js"></script>
+		<!--script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"--></script> 
+		<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script> 
+		<script type='text/javascript'>jQuery.noConflict();</script>
+		<script src="jquery-ui-1.10.4.custom/js/jquery-ui-1.10.4.custom.js"></script>
+		<!--script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script-->
+		<script src="http://code.highcharts.com/highcharts.js"></script>
+		<!--script type="text/javascript" src="./js/themes/gray.js"></script-->
+		<script type='text/javascript' src='./js/prototip/prototip.js'></script>
+    </head>
+    <body class="cardholder" onload="document.getElementById('cards').scrollLeft =document.getElementById('cards').scrollWidth;">
+		<div id="allotherholder" class="allotherholderWIDE">
+		<header class="instructions">
+			Tour the CA1 quantitative assessment (<a href="http://onlinelibrary.wiley.com/doi/10.1002/hipo.22141/full" target="_blank">Bezaire & Soltesz, Hippocampus, 2013</a>). <div id="helptip" class="helpbutton" style="display:inline;padding:2px">  Help  </div>
+ <!--Click <button id="TestButton" type="button" class="navbutton"> -> </button> to move to the next calculation or <button id="TestButton2" type="button" class="navbutton"> >> </button> to skip to the end result computed using any changes you have already made. Within each calculation, click a <div id="TestFact" class="observe">fact</div> to see the origin of a fact used in the calculation, or an <div id="TestAssume" class="assume">assumption</div> to see what assumption we made or to change the assumption if you want to customize the assessment.-->
+	<button id="showresults" type="button" class="miscbutton" onclick="ToggleResults()"> << show results </button>
+		</header>
+		<div id="cards" class="cardholder">
+		</div>
+		<footer class="instructions">
+			This website is a graphical representation of the calculations in the publication: <a href="http://onlinelibrary.wiley.com/doi/10.1002/hipo.22141/full" target="_blank">Bezaire MJ, Soltesz I. 2013. Quantitative Assessment of CA1 Local Circuits: Knowledge Base for Interneuron-Pyramidal Cell Connectivity. Hippocampus: 23(9), 751-785</a>. Please cite this publication if you use the data or calculations from this website. <!--, and <i>Hippocampus</i> has granted permission to use the publication content for the purpose of this website.--> Website built by <a href="http://www.mariannebezaire.com" target="_blank">Marianne Bezaire</a> and Kelly Burk in the lab of <a href="http://www.ivansolteszlab.org" target="_blank">Ivan Soltesz</a> (with support from the National Science Foundation, GRFP #DGE-0808392 to MB, and from the National Institutes of Health, NINDS #NS35915 to IS) using <a href="http://www.highcharts.com/" target="_blank">HighCharts</a>, <a href="http://www.nickstakenburg.com/projects/prototip2/" target="_blank">ProtoTip2</a>, and Google Spreadsheets. Material other than published data is copyright (c) 2014. <script type="text/javascript" language="javascript">
+<!--
+// Email obfuscator script 2.1 by Tim Williams, University of Arizona
+// Random encryption key feature by Andrew Moulden, Site Engineering Ltd
+// This code is freeware provided these four comment lines remain intact
+// A wizard to generate this code is at http://www.jottings.com/obfuscator/
+{ coded = "u6fnG@7uZ.nK7"
+  key = "eTCoJlgLfk2MNnDzxi34BtQ9yWwjh5ZVq0HcFR8rOSEaAmUduIP1bpXv6sGYK7"
+  shift=coded.length
+  link=""
+  for (i=0; i<coded.length; i++) {
+    if (key.indexOf(coded.charAt(i))==-1) {
+      ltr = coded.charAt(i)
+      link += (ltr)
+    }
+    else {     
+      ltr = (key.indexOf(coded.charAt(i))-shift+key.length) % key.length
+      link += (key.charAt(ltr))
+    }
+  }
+document.write("<a href='mailto:"+link+"'>Send technical website feedback or content-specific feedback</a>")
+}
+//-->
+</script><noscript>Sorry, you need Javascript on to email me.</noscript>. <a href="http://www.mariannebezaire.com">Tips for making an interactive graphic.</a>
+		</footer></div>
+	<div id="results" class="resultsholder" style="display:none" data-section="Show Results">
+	<div class="selstyle"><select class="selstyle" id="charttype" onchange="alert('Feature not yet implemented')">
+	<!--option value="0">Hippocampal Subfields</option>
+	<option value="1">CA1 Neuron Groups</option-->
+	<option value="0">Interneuron Types</option>
+	<option value="1">Interneuron Classes</option>
+	</select> for <select class="selstyle" id="layers"  onchange="alert('Feature not yet implemented')">
+	<option value="0">All Layers</option>
+	<option value="1">S. Oriens</option>
+	<option value="2">S. Pyramidale</option>
+	<option value="3">S. Radiatum</option>
+	<option value="4">S. Lac.-Mol.</option>
+	</select>
+	<button id="exportresults" type="button" class="selstyle" onclick="ExportResults()"> Export </button>
+	</div><div id="ResultsChart" style="height:500px;width=400px;padding-left: 0px;"></div><br/><div>
+	<table id="ResultsTable" class="example2">
+	</table></div>
+	</div>
+    </body>
+
+		<script  type="text/javascript">
+		DEFinrnFrac = 11;
+		dataInrnFrac = 11;
+		InitResults();
+		
+		CalcResults();
+		
+		helptext = 'Click <button id="TestButton" type="button" class="navbutton" style="line-height:90%;"> -> </button> to move to the next calculation or <button id="TestButton2" type="button" class="navbutton" style="line-height:90%;"> >> </button> to skip to the end result computed using any changes you have already made. Within each calculation, click a <div id="TestFact" class="observe" style="line-height:90%;">fact</div> to see the origin of a fact used in the calculation, or an <div id="TestAssume" class="assume" style="line-height:90%;">assumption</div> to see what assumption we made. Facts and assumptions based on numbers can be changed if you want to customize the assessment. Click <button id="TestButton3" type="button" class="navbutton" style="line-height:90%;"> R </button> to undo any customizations to that card, restoring the default assumption and observation values.';
+		new Tip('helptip', helptext, {
+		  title: 'Help',
+		  style: 'helpstyle',
+		  stem: 'bottomLeft',
+		  target: document.getElementById('helptip')
+		});
+		
+		function ExportResults() {
+		alert("To be added - export the table below and a list of any assumptions you customized")
+		};
+		
+		function ShowNextCard(mycard,allcards) {
+		//alert("mycard = " + mycard)
+		if (mycard=='' || !mycard) {
+			var myresult = document.getElementById("results");
+			if (myresult.style.display=="none") { ToggleResults() };
+		} else {
+			if (mycard=='results') {
+				var myresult = document.getElementById("results");
+				if (myresult.style.display=="none") { ToggleResults() };
+				return;
+			};
+			var splitcards = mycard.split(";");
+			var thechoice=0;
+			if (splitcards.length>1) {
+				var mybuttons={};
+				for (var x=0;x<splitcards.length;x++) {
+					eval('mybuttons[document.getElementById(splitcards[x]).dataset.section]=function() { window.thechoice= ' + x + '; jQuery( this ).dialog( "close" );};');
+				};
+				
+				jQuery("<div id='mydialog' class='dialog' title=''><p>Pick what you want to calculate:</p></div>").dialog({
+				buttons:  mybuttons,
+				modal: true,
+				zIndex: 105,
+				dialogClass: 'dialog_style1',
+				height: "100",
+				close: function () {
+					for (var x=0;x<splitcards.length;x++) {
+						if (splitcards[x]!="results") {document.getElementById(splitcards[x]).style.display="none"};
+						if (mycard!="results") {setNextCards(splitcards[x],"none")}
+					}
+					mycard=splitcards[window.thechoice];
+					if (mycard=='results') {
+						var myresult = document.getElementById("results");
+						if (myresult.style.display=="none") { ToggleResults() };
+						return;
+					};					
+					
+						var card = document.getElementById(mycard);
+						if (card) {
+							card.style.display="table-cell"; // hidden
+							jQuery.getScript("./qacharts/" + mycard + "Chart.js"); // just added
+							document.getElementById('cards').scrollLeft =document.getElementById('cards').scrollWidth;
+							if (allcards==1) {
+								var nextFwd = document.getElementById(mycard + "Fin");
+								ShowNextCard(nextFwd.onclick.apply(nextFwd),1)
+							} else {
+								if (mycard!="results") {setNextCards(mycard,"none")}
+							}
+						}
+					}
+				});
+			} else {
+				if (mycard=='results') {
+					var myresult = document.getElementById("results");
+					if (myresult.style.display=="none") { ToggleResults() };
+					return;
+				};					
+				var card = document.getElementById(mycard);
+				if (card) {
+					card.style.display="table-cell"; // hidden
+					jQuery.getScript("./qacharts/" + mycard + "Chart.js"); // just added
+					document.getElementById('cards').scrollLeft =document.getElementById('cards').scrollWidth;
+					if (allcards==1) {
+						var nextFwd = document.getElementById(mycard + "Fin");
+						ShowNextCard(nextFwd.onclick.apply(nextFwd),1)
+					} else {
+						if (mycard!="results") {setNextCards(mycard,"none")}
+					}
+				}
+			}
+		}
+		};
+		
+		function setNextCards(mycard,displaytype) {
+			var nextCardId = document.getElementById(mycard).dataset.nextcard;
+			if (nextCardId=='' || !nextCardId) {return};
+			var splitnextcards = nextCardId.split(";");
+			for (var y=0;y<splitnextcards.length;y++) {
+				nextCardId = splitnextcards[y];
+				var nextCard = document.getElementById(nextCardId);
+				if (nextCard) {
+					nextCard.style.display=displaytype;
+					setNextCards(nextCardId,displaytype);
+				}
+			}
+		};
+		
+		
+		jQuery.getScript("./qacharts/ResultsChart.js", function(){
+			flag+=1;
+		});
+		
+		
+		function ToggleResults(){
+			var myresult = document.getElementById("results");
+			var mybutton = document.getElementById("showresults");
+			var allelse = document.getElementById("allotherholder");
+			if (myresult.style.display=="none") {
+				myresult.style.display="block";  // compact
+				mybutton.innerHTML=" >> hide results ";
+				allelse.setAttribute("class","allotherholderNARROW");
+			} else {
+				myresult.style.display="none";  // compact
+				allelse.setAttribute("class","allotherholderWIDE");
+				mybutton.innerHTML=" << show results ";
+			}
+
+			document.getElementById('cards').scrollLeft =document.getElementById('cards').scrollWidth;
+		};
+		
+		function InitResults() {			
+			// update table
+			window.totalinrn = window.inrnNum;
+			window.CA1nrns = 350000;
+			window.inrnFrac = .11; 
+			window.GABAoverlap = .42; 
+			window.COUPTFIIoverlap = .98;
+			
+			window.COUP_SLM=.29;
+			window.COUP_SR=.22;
+			window.COUP_SP=.35;
+			window.COUP_SO=.14;	
+			
+			window.nNOSNPYoverlapCOUPTFII_SP = .63; //parseFloat(((document.getElementById(myKey).dataset.custom)/100).toFixed(2)); 
+			window.COUPTFIIoverlapnNOSNPY_SP = .59;
+			window.nNOSNPYoverlapCOUPTFII_SO = .80; //parseFloat(((document.getElementById(myKey).dataset.custom)/100).toFixed(2)); 
+			window.COUPTFIIoverlapnNOSNPY_SO = .34;
+			window.nNOSNPYoverlapCOUPTFII_SR = .42; //parseFloat(((document.getElementById(myKey).dataset.custom)/100).toFixed(2)); 
+			window.COUPTFIIoverlapnNOSNPY_SR = .35;
+			window.reelinFracnNOSNPY=.20;
+			window.actininoverlapCOUPTFII = 1.00; //parseFloat(((document.getElementById(myKey).dataset.custom)/100).toFixed(2)); 
+			window.COUPTFIIoverlapactinin = .45;
+			window.actininoverlapNGF = .71; //parseFloat(((document.getElementById(myKey).dataset.custom)/100).toFixed(2)); 
+			window.NGFoverlapactinin = .98;
+
+			window.ngf_SP = 0;
+			window.ngf_SO = 0;
+			window.ivy_SLM = 0;
+			
+/*			window.ivy_SLM = 0;
+			window.ivy_SR = 0;
+			window.ivy_SP = 0;
+			window.ivy_SO = 0;
+			
+			window.ngf_SLM = 0;
+			window.ngf_SR = 0;
+			window.ngf_SP = 0;
+			window.ngf_SO = 0;*/
+						
+			window.olm_SO = 1640;
+			window.olm_SP = 0;
+			window.olm_SR = 0;
+			window.olm_SLM = 0;
+			
+			window.dbl_SO = 760;
+			window.dbl_SP = 0;
+			window.dbl_SR = 0;
+			window.dbl_SLM = 0;
+
+			window.sep_SO = 190;
+			window.sep_SP = 0;
+			window.sep_SR = 0;
+			window.sep_SLM = 0;
+			
+			window.ret_SO = 640;
+			window.ret_SP = 0;
+			window.ret_SR = 0;
+			window.ret_SLM = 0;
+			
+			window.oth_SO = 350;
+			window.oth_SP = 0;
+			window.oth_SR = 0;
+			window.oth_SLM = 0;
+			
+			window.pvb_SO = 1320;
+			window.pvb_SP = 3880;
+			window.pvb_SR = 330;
+			window.pvb_SLM = 0;
+			
+			window.bis_SO = 530;
+			window.bis_SP = 1550;
+			window.bis_SR = 130;
+			window.bis_SLM = 0;
+
+			window.axo_SO = 350;
+			window.axo_SP = 1030;
+			window.axo_SR = 90;
+			window.axo_SLM = 0;			
+			
+			window.cmi_SO = 360;
+			window.cmi_SP = 130;
+			window.cmi_SR = 0;
+			window.cmi_SLM = 0;
+			
+			window.sca_SO = 0;
+			window.sca_SP = 0;
+			window.sca_SR = 400;
+			window.sca_SLM = 0;
+
+			window.ppa_SO = 0;
+			window.ppa_SP = 0;
+			window.ppa_SR = 0;
+			window.ppa_SLM = 490;
+			
+			window.adi_SO = 0;
+			window.adi_SP = 390;
+			window.adi_SR = 0;
+			window.adi_SLM = 0;
+
+			window.cck_SO = 780;
+			window.cck_SP = 940;
+			window.cck_SR = 1170;
+			window.cck_SLM = 710;
+
+			window.is1_SO = 780;
+			window.is1_SP = 1800;
+			window.is1_SR = 780;
+			window.is1_SLM = 890;
+
+			window.is2_SO = 0;
+			window.is2_SP = 480;
+			window.is2_SR = 450;
+			window.is2_SLM = 1040;
+
+			window.is3_SO = 0;
+			window.is3_SP = 910;
+			window.is3_SR = 220;
+			window.is3_SLM = 120;
+
+			window.otherfam = 480;
+		};	
+			
+		function CalcResults() {
+			var myKey = "NeuronNumFact";
+			if (document.getElementById(myKey + "Input")) {
+				document.getElementById(myKey).dataset.custom = document.getElementById(myKey + "Input").value;
+				window.CA1nrns = document.getElementById("NeuronNumFact").dataset.custom;
+			}
+
+			var myKey = "InrnFractionassume";
+			if (document.getElementById(myKey + "Input")) {
+				document.getElementById(myKey).dataset.custom = document.getElementById(myKey + "Input").value;
+				window.inrnFrac = parseFloat(((document.getElementById(myKey).dataset.custom)/100).toFixed(2)); 
+			}
+			window.inrnNum = window.CA1nrns*window.inrnFrac;
+
+			var myKey = "COUPGABAFact";
+			if (document.getElementById(myKey + "Input")) {
+				document.getElementById(myKey).dataset.custom = document.getElementById(myKey + "Input").value;
+				window.GABAoverlap = parseFloat(((document.getElementById(myKey).dataset.custom)/100).toFixed(2)); 
+			}
+			window.COUPcells = window.inrnNum*window.GABAoverlap/window.COUPTFIIoverlap;
+			
+			var myKey = "COUPLayerFact";
+			if (document.getElementById(myKey + "Input")) {
+				document.getElementById(myKey).dataset.custom = document.getElementById(myKey + "Input").value;
+			}
+
+			var myKey = "nNOSNPYpyramidaleFact";
+			if (document.getElementById(myKey + "Input")) {
+				document.getElementById(myKey).dataset.custom = document.getElementById(myKey + "Input").value;
+			}
+
+			window.nNOSNPYpyramidale = Math.round(window.COUPcells*window.COUP_SP*window.COUPTFIIoverlapnNOSNPY_SP/window.nNOSNPYoverlapCOUPTFII_SP);
+			window.ivy_SP = Math.round(window.nNOSNPYpyramidale/10)*10;
+
+			var myKey = "nNOSNPYoriensFact";
+			if (document.getElementById(myKey + "Input")) {
+				document.getElementById(myKey).dataset.custom = document.getElementById(myKey + "Input").value;
+			}
+
+			window.nNOSNPYoriens = Math.round(window.COUPcells*window.COUP_SO*window.COUPTFIIoverlapnNOSNPY_SO/window.nNOSNPYoverlapCOUPTFII_SO);
+			window.ivy_SO = Math.round(window.nNOSNPYoriens/10)*10;
+
+			var myKey = "nNOSNPYradiatumFact";
+			if (document.getElementById(myKey + "Input")) {
+				document.getElementById(myKey).dataset.custom = document.getElementById(myKey + "Input").value;
+			}
+			window.nNOSNPYradiatum = Math.round(window.COUPcells*window.COUP_SR*window.COUPTFIIoverlapnNOSNPY_SR/window.nNOSNPYoverlapCOUPTFII_SR);
+
+			var myKey = "nNOSNPYReelinRadFact";
+			if (document.getElementById(myKey + "Input")) {
+				document.getElementById(myKey).dataset.custom = document.getElementById(myKey + "Input").value;
+				window.reelinFracnNOSNPY = parseFloat(document.getElementById(myKey).dataset.custom)/100;
+			}
+			
+			window.ivy_SR = Math.round(window.nNOSNPYradiatum*(1-window.reelinFracnNOSNPY)/10)*10
+			window.ngf_SR = Math.round(window.nNOSNPYradiatum*window.reelinFracnNOSNPY/10)*10;
+
+			var myKey = "actininLMFact";
+			if (document.getElementById(myKey + "Input")) {
+				document.getElementById(myKey).dataset.custom = document.getElementById(myKey + "Input").value;
+			}
+			window.actininlacmol = Math.round(window.COUPcells*window.COUP_SLM*window.COUPTFIIoverlapactinin/window.actininoverlapCOUPTFII);
+
+			var myKey = "ngfLMCellsFact1";
+			if (document.getElementById(myKey + "Input")) {
+				document.getElementById(myKey).dataset.custom = document.getElementById(myKey + "Input").value;
+			}
+			window.ngf_SLM = Math.round(window.actininlacmol*window.NGFoverlapactinin/window.actininoverlapNGF/10)*10;
+
+		}
+			
+			
+		function UpdateResults(mychartfcn) {
+			if (mychartfcn!='') { eval(mychartfcn + "FCN()");};
+			CalcResults()
+		
+			// update table
+			window.totalinrn = window.inrnNum;
+
+			window.olm = window.olm_SO + window.olm_SP + window.olm_SR + window.olm_SLM;
+			window.dbl = window.dbl_SO + window.dbl_SP + window.dbl_SR + window.dbl_SLM;
+			window.sep = window.sep_SO + window.sep_SP + window.sep_SR + window.sep_SLM;
+			window.ret = window.ret_SO + window.ret_SP + window.ret_SR + window.ret_SLM;
+			window.oth = window.oth_SO + window.oth_SP + window.oth_SR + window.oth_SLM;
+			
+			window.somfam = window.olm + window.dbl + window.sep + window.ret + window.oth;
+			window.somfam_SO = window.olm_SO + window.dbl_SO + window.sep_SO + window.ret_SO + window.oth_SO;
+			window.somfam_SP = window.olm_SP + window.dbl_SP + window.sep_SP + window.ret_SP + window.oth_SP;
+			window.somfam_SR = window.olm_SR + window.dbl_SR + window.sep_SR + window.ret_SR + window.oth_SR;
+			window.somfam_SLM = window.olm_SLM + window.dbl_SLM + window.sep_SLM + window.ret_SLM + window.oth_SLM;
+			
+			window.pvb = window.pvb_SO + window.pvb_SP + window.pvb_SR + window.pvb_SLM;
+			window.bis = window.bis_SO + window.bis_SP + window.bis_SR + window.bis_SLM;
+			window.axo = window.axo_SO + window.axo_SP + window.axo_SR + window.axo_SLM;
+
+			window.pvfam = window.pvb + window.bis + window.axo;
+			window.pvfam_SO = window.pvb_SO + window.bis_SO + window.axo_SO;
+			window.pvfam_SP = window.pvb_SP + window.bis_SP + window.axo_SP;
+			window.pvfam_SR = window.pvb_SR + window.bis_SR + window.axo_SR;
+			window.pvfam_SLM = window.pvb_SLM + window.bis_SLM + window.axo_SLM;
+			
+			window.cmi = window.cmi_SO + window.cmi_SP + window.cmi_SR + window.cmi_SLM;
+			window.sca = window.sca_SO + window.sca_SP + window.sca_SR + window.sca_SLM;
+			window.ppa = window.ppa_SO + window.ppa_SP + window.ppa_SR + window.ppa_SLM;
+			window.adi = window.adi_SO + window.adi_SP + window.adi_SR + window.adi_SLM;
+			window.cck = window.cck_SO + window.cck_SP + window.cck_SR + window.cck_SLM;
+
+			window.cckfam = window.cck + window.sca + window.ppa + window.adi + window.cmi;
+			window.cckfam_SO = window.cck_SO + window.sca_SO + window.ppa_SO + window.adi_SO + window.cmi_SO;
+			window.cckfam_SP = window.cck_SP + window.sca_SP + window.ppa_SP + window.adi_SP + window.cmi_SP;
+			window.cckfam_SR = window.cck_SR + window.sca_SR + window.ppa_SR + window.adi_SR + window.cmi_SR;
+			window.cckfam_SLM = window.cck_SLM + window.sca_SLM + window.ppa_SLM + window.adi_SLM + window.cmi_SLM;
+
+			window.is1 = window.is1_SO + window.is1_SP + window.is1_SR + window.is1_SLM;
+			window.is2 = window.is2_SO + window.is2_SP + window.is2_SR + window.is2_SLM;
+			window.is3 = window.is3_SO + window.is3_SP + window.is3_SR + window.is3_SLM;
+
+			window.isfam = window.is1 + window.is2 + window.is3;
+			window.isfam_SO = window.is1_SO + window.is2_SO + window.is3_SO;
+			window.isfam_SP = window.is1_SP + window.is2_SP + window.is3_SP;
+			window.isfam_SR = window.is1_SR + window.is2_SR + window.is3_SR;
+			window.isfam_SLM = window.is1_SLM + window.is2_SLM + window.is3_SLM;
+
+			window.ivy = window.ivy_SO+window.ivy_SP+window.ivy_SR+window.ivy_SLM;
+			window.ngf = window.ngf_SR+window.ngf_SLM;
+			
+			window.ngfam = window.ngf + window.ivy;
+			window.ngfam_SO = window.ngf_SO + window.ivy_SO;
+			window.ngfam_SP = window.ngf_SP + window.ivy_SP;
+			window.ngfam_SR = window.ngf_SR + window.ivy_SR;
+			window.ngfam_SLM = window.ngf_SLM + window.ivy_SLM;
+			
+			window.totalinrn_SO = window.ngfam_SO  + window.cckfam_SO + window.pvfam_SO + window.somfam_SO + window.isfam_SO;
+			window.totalinrn_SP = window.ngfam_SP  + window.cckfam_SP + window.pvfam_SP + window.somfam_SP + window.isfam_SP;
+			window.totalinrn_SR = window.ngfam_SR  + window.cckfam_SR + window.pvfam_SR + window.somfam_SR + window.isfam_SR;
+			window.totalinrn_SLM = window.ngfam_SLM  + window.cckfam_SLM + window.pvfam_SLM + window.somfam_SLM + window.isfam_SLM;
+			window.knowninrn = window.ngfam  + window.cckfam + window.pvfam + window.somfam + window.isfam;
+			window.otherfam = window.totalinrn - window.knowninrn;
+
+			window.total2use = window.totalinrn;
+			
+			var mytablestr = '<tr><th rowspan="2">Interneuron</th><th rowspan="2">Fraction (%)</th><th rowspan="2">Total</th><th colspan="4">Layer</th></tr>';
+			mytablestr += '<tr><th>Oriens</th><th>Pyramidale</th><th>Radiatum</th><th>Lac.Mol.</th></tr>';
+			mytablestr += '<tr class="cellclass"><td>Neurogliaform Family</td><td>' + (Math.round(1000*window.ngfam/window.totalinrn)/10).toFixed(1) + '</td><td>' + window.ngfam + '</td><td>' + window.ngfam_SO + '</td><td>' + window.ngfam_SP + '</td><td>' + window.ngfam_SR + '</td><td>' + window.ngfam_SLM + '</td></tr>';
+			mytablestr += '<tr><td>Ivy</td><td>' + (Math.round(1000*window.ivy/window.totalinrn)/10).toFixed(1) + '</td><td>' + window.ivy + '</td><td>' + window.ivy_SO + '</td><td>' + window.ivy_SP + '</td><td>' + window.ivy_SR + '</td><td>' + window.ivy_SLM + '</td></tr>';
+			mytablestr += '<tr><td>Neurogliaform</td><td>' + (Math.round(1000*window.ngf/window.totalinrn)/10).toFixed(1) + '</td><td>' + window.ngf + '</td><td>' + window.ngf_SO + '</td><td>' + window.ngf_SP + '</td><td>' + window.ngf_SR + '</td><td>' + window.ngf_SLM + '</td></tr>';
+			mytablestr += '<tr class="cellclass"><td>SOM expressing</td><td>' + (Math.round(1000*window.somfam/window.totalinrn)/10).toFixed(1) + '</td><td>' + window.somfam + '</td><td>' + window.somfam_SO + '</td><td>' + window.somfam_SP + '</td><td>' + window.somfam_SR + '</td><td>' + window.somfam_SLM + '</td></tr>';
+			mytablestr += '<tr><td>O-LM</td><td>' + (Math.round(1000*window.olm/window.totalinrn)/10).toFixed(1) + '</td><td>' + window.olm + '</td><td>' + window.olm_SO + '</td><td>' + window.olm_SP + '</td><td>' + window.olm_SR + '</td><td>' + window.olm_SLM + '</td></tr>';
+			mytablestr += '<tr><td>Double proj.</td><td>' + (Math.round(1000*window.dbl/window.totalinrn)/10).toFixed(1) + '</td><td>' + window.dbl + '</td><td>' + window.dbl_SO + '</td><td>' + window.dbl_SP + '</td><td>' + window.dbl_SR + '</td><td>' + window.dbl_SLM + '</td></tr>';
+			mytablestr += '<tr><td>CB- septal proj.</td><td>' + (Math.round(1000*window.sep/window.totalinrn)/10).toFixed(1) + '</td><td>' + window.sep + '</td><td>' + window.sep_SO + '</td><td>' + window.sep_SP + '</td><td>' + window.sep_SR + '</td><td>' + window.sep_SLM + '</td></tr>';
+			mytablestr += '<tr><td>Oriens-retrohipp.</td><td>' + (Math.round(1000*window.ret/window.totalinrn)/10).toFixed(1) + '</td><td>' + window.ret + '</td><td>' + window.ret_SO + '</td><td>' + window.ret_SP + '</td><td>' + window.ret_SR + '</td><td>' + window.ret_SLM + '</td></tr>';
+			mytablestr += '<tr><td>Other SOM+ cells</td><td>' + (Math.round(1000*window.oth/window.totalinrn)/10).toFixed(1) + '</td><td>' + window.oth + '</td><td>' + window.oth_SO + '</td><td>' + window.oth_SP + '</td><td>' + window.oth_SR + '</td><td>' + window.oth_SLM + '</td></tr>';
+			mytablestr += '<tr class="cellclass"><td>PV expressing</td><td>' + (Math.round(1000*window.pvfam/window.totalinrn)/10).toFixed(1) + '</td><td>' + window.pvfam + '</td><td>' + window.pvfam_SO + '</td><td>' + window.pvfam_SP + '</td><td>' + window.pvfam_SR + '</td><td>' + window.pvfam_SLM + '</td></tr>';
+			mytablestr += '<tr><td>PV+ Basket</td><td>' + (Math.round(1000*window.pvb/window.totalinrn)/10).toFixed(1) + '</td><td>' + window.pvb + '</td><td>' + window.pvb_SO + '</td><td>' + window.pvb_SP + '</td><td>' + window.pvb_SR + '</td><td>' + window.pvb_SLM + '</td></tr>';
+			mytablestr += '<tr><td>Bistratified</td><td>' + (Math.round(1000*window.bis/window.totalinrn)/10).toFixed(1) + '</td><td>' + window.bis + '</td><td>' + window.bis_SO + '</td><td>' + window.bis_SP + '</td><td>' + window.bis_SR + '</td><td>' + window.bis_SLM + '</td></tr>';
+			mytablestr += '<tr><td>Axo-axonic</td><td>' + (Math.round(1000*window.axo/window.totalinrn)/10).toFixed(1) + '</td><td>' + window.axo + '</td><td>' + window.axo_SO + '</td><td>' + window.axo_SP + '</td><td>' + window.axo_SR + '</td><td>' + window.axo_SLM + '</td></tr>';
+			mytablestr += '<tr class="cellclass"><td>CCK expressing</td><td>' + (Math.round(1000*window.cckfam/window.totalinrn)/10).toFixed(1) + '</td><td>' + window.cckfam + '</td><td>' + window.cckfam_SO + '</td><td>' + window.cckfam_SP + '</td><td>' + window.cckfam_SR + '</td><td>' + window.cckfam_SLM + '</td></tr>';
+			mytablestr += '<tr><td>CCK+ Basket</td><td>' + (Math.round(1000*window.cck/window.totalinrn)/10).toFixed(1) + '</td><td>' + window.cck + '</td><td>' + window.cck_SO + '</td><td>' + window.cck_SP + '</td><td>' + window.cck_SR + '</td><td>' + window.cck_SLM + '</td></tr>';
+			mytablestr += '<tr><td>ADI</td><td>' + (Math.round(1000*window.adi/window.totalinrn)/10).toFixed(1) + '</td><td>' + window.adi + '</td><td>' + window.adi_SO + '</td><td>' + window.adi_SP + '</td><td>' + window.adi_SR + '</td><td>' + window.adi_SLM + '</td></tr>';
+			mytablestr += '<tr><td>SCA</td><td>' + (Math.round(1000*window.sca/window.totalinrn)/10).toFixed(1) + '</td><td>' + window.sca + '</td><td>' + window.sca_SO + '</td><td>' + window.sca_SP + '</td><td>' + window.sca_SR + '</td><td>' + window.sca_SLM + '</td></tr>';
+			mytablestr += '<tr><td>PPA</td><td>' + (Math.round(1000*window.ppa/window.totalinrn)/10).toFixed(1) + '</td><td>' + window.ppa + '</td><td>' + window.ppa_SO + '</td><td>' + window.ppa_SP + '</td><td>' + window.ppa_SR + '</td><td>' + window.ppa_SLM + '</td></tr>';
+			mytablestr += '<tr><td>CCK Misc.</td><td>' + (Math.round(1000*window.cmi/window.totalinrn)/10).toFixed(1) + '</td><td>' + window.cmi + '</td><td>' + window.cmi_SO + '</td><td>' + window.cmi_SP + '</td><td>' + window.cmi_SR + '</td><td>' + window.cmi_SLM + '</td></tr>';
+			mytablestr += '<tr class="cellclass"><td>Interneuron-specific</td><td>' + (Math.round(1000*window.isfam/window.totalinrn)/10).toFixed(1) + '</td><td>' + window.isfam + '</td><td>' + window.isfam_SO + '</td><td>' + window.isfam_SP + '</td><td>' + window.isfam_SR + '</td><td>' + window.isfam_SLM + '</td></tr>';
+			mytablestr += '<tr><td>IS I</td><td>' + (Math.round(1000*window.is1/window.totalinrn)/10).toFixed(1) + '</td><td>' + window.is1 + '</td><td>' + window.is1_SO + '</td><td>' + window.is1_SP + '</td><td>' + window.is1_SR + '</td><td>' + window.is1_SLM + '</td></tr>';
+			mytablestr += '<tr><td>IS II</td><td>' + (Math.round(1000*window.is2/window.totalinrn)/10).toFixed(1) + '</td><td>' + window.is2 + '</td><td>' + window.is2_SO + '</td><td>' + window.is2_SP + '</td><td>' + window.is2_SR + '</td><td>' + window.is2_SLM + '</td></tr>';
+			mytablestr += '<tr><td>IS III</td><td>' + (Math.round(1000*window.is3/window.totalinrn)/10).toFixed(1) + '</td><td>' + window.is3 + '</td><td>' + window.is3_SO + '</td><td>' + window.is3_SP + '</td><td>' + window.is3_SR + '</td><td>' + window.is3_SLM + '</td></tr>';
+			mytablestr += '<tr class="cellclass"><td>Other</td><td>' + (Math.round(1000*window.otherfam/window.totalinrn)/10).toFixed(1) + '</td><td>' + window.otherfam + '</td><td>'  + '</td><td>' +  '</td><td>' +  '</td><td>'  + '</td></tr>';
+			mytablestr += '<tr class="cellclass"><td>Total</td><td>' + (Math.round(1000*window.totalinrn/window.totalinrn)/10).toFixed(1) + '</td><td>' + window.totalinrn + '</td><td>' + window.totalinrn_SO + '</td><td>' + window.totalinrn_SP + '</td><td>' + window.totalinrn_SR + '</td><td>' + window.totalinrn_SLM + '</td></tr>';
+	
+			document.getElementById('ResultsTable').innerHTML=mytablestr;
+			
+			// if classes, only include *fam* data
+			// if by layer, only include *_S* data
+			
+			eval('ResultsFCN()')
+		}
+
+	$(function ($) { // add all cards with assumptions and observations
+		try { 
+			$.getJSON( "https://spreadsheets.google.com/feeds/list/0AkprlhQnTwTRdGgtd2dBUGhNekR1RXBaZjV3SDJKSEE/od6/public/values?alt=json-in-script&callback=?",
+			function (data) {	
+				var firstcardalready=0;
+				$.each(data.feed.entry, function(i,entry) {						
+				//Card	Title	Id	Assumptions	Observations	Pre	Post	Section
+					var div = document.createElement('div');
+					div.id = entry.gsx$id.$t;
+					div.className = "card";	
+					div.dataset.num=entry.gsx$num.$t;		
+					div.dataset.nextcard=entry.gsx$post.$t;		
+					div.dataset.section=entry.gsx$section.$t;
+
+					if (firstcardalready==0) {
+						firstcardalready=1;
+						div.style.display="table-cell"; // hidden
+					}
+
+					var inner =	'<div class="sectionheader"><span style="float:left">#' + entry.gsx$num.$t + '</span><span style="float:center">' + entry.gsx$section.$t + '</span></div>';
+					inner += '<div id="' + entry.gsx$id.$t + 'Chart" class="chart" data-chartrendered="0" data-tooltipsrendered="0"></div>'; // inner +=	
+					
+					
+					inner += '<div id="' + entry.gsx$id.$t + 'Nav" class="nav">'
+					inner += '<span><button id="' + entry.gsx$id.$t + 'Rld" type="button" onclick="ReloadCard(\'' + entry.gsx$id.$t + '\',0)" class="navbutton"> R </button></span>'  // reset this card
+					inner += '<span><button id="' + entry.gsx$id.$t + 'Fwd" type="button" onclick="ShowNextCard(\'' + entry.gsx$post.$t + '\',0)" class="navbutton"> -> </button></span>' 
+					inner += '<span><button id="' + entry.gsx$id.$t + 'Fin" type="button" onclick="ShowNextCard(\'' + entry.gsx$post.$t + '\',1)" class="navbutton"> >> </button></span>'
+					inner += '</div>';
+					
+					if (entry.gsx$assumptions.$t) {
+						var allassumes = entry.gsx$assumptions.$t;
+						var splitassumes = allassumes.split(";");	
+	
+						var defaultassumes = entry.gsx$defaultassume.$t;
+						var splitdefaults = defaultassumes.split(";");		
+						for (var s=0; s<splitassumes.length ; s++) {
+							inner += '<div id="' + splitassumes[s] + '" class="assume" data-default="' + splitdefaults[s] + '" data-custom="' + splitdefaults[s] + '">' + splitassumes[s] + '</div>';
+						}
+					}
+					
+					if (entry.gsx$observations.$t) {
+						var allobserves = entry.gsx$observations.$t;
+						var splitobserves = allobserves.split(";");					
+	
+						var defaultobserves = entry.gsx$defaultobserve.$t;
+						var splitdefaults = defaultobserves.split(";");		
+						for (var s=0; s<splitobserves.length ; s++) {
+							inner += '<div id="' + splitobserves[s] + '" class="observe" data-default="' + splitdefaults[s] + '" data-custom="' + splitdefaults[s] + '">' + splitobserves[s] + '</div>';
+						}
+					}
+
+					div.innerHTML = inner;
+					document.getElementById("cards").appendChild(div);	
+				});
+			addToolTips();
+			});
+		
+		} catch (err) {
+			txt = 'Error!\n';
+			txt += err.name + ': ' + err.message + '\n';
+			txt += err.fileName + ': ' + err.lineNumber;
+			alert(txt)
+		};				
+	})(jQuery);
+					
+		function ReloadCard(mycardID) {
+			var myVars = document.getElementById(mycardID).getElementsByClass("Variable");
+			for (var v=0;v<myVars.length;v++) {
+				myVars[v].dataset.custom = myVars[v].dataset.default;
+			}
+			eval(mycardID + "FCN();")
+		}
+					
+		function addToolTips() {
+			try {		
+			jQuery.getJSON( "https://spreadsheets.google.com/feeds/list/0AkprlhQnTwTRdDQ4OF9fUTVobDVqMEQtbko5MEdwZ2c/od6/public/values?alt=json-in-script&callback=?",
+			function (data) {	
+				jQuery.each(data.feed.entry, function(i,entry) {
+					var myitem = document.getElementById(entry.gsx$key.$t);
+					if (!myitem) {alert(entry.gsx$key.$t)};
+					myitem.innerHTML=entry.gsx$citation.$t;
+					if (entry.gsx$style.$t=="Passume") {
+						myitem.innerHTML=entry.gsx$citation.$t + ", A. " + entry.gsx$place.$t;
+					}
+					var item = '<b class="emphme">' + entry.gsx$description.$t + '</b>';	
+					item += '<br/><b>' + entry.gsx$title.$t + '</b>';
+					if (entry.gsx$image.$t) {	
+						item += '<br/><img src="' + entry.gsx$image.$t + '" width="200px"/>';
+					}
+					if (entry.gsx$quote.$t) {	
+						item += '<br/>Quote: <i color="blue">' + entry.gsx$quote.$t + '</i>';
+					}
+					if (entry.gsx$table.$t) {	
+						item += '<br/>Table entry: <i color="blue">' + entry.gsx$table.$t + '</i>';
+					}
+					if (entry.gsx$place.$t) {	
+						if (entry.gsx$style.$t=="Passume") {
+							item += '<br/><a href="http://onlinelibrary.wiley.com/doi/10.1002/hipo.22141/full#hipo22141-sec-0003"  target="_blank">See assumption ' + entry.gsx$place.$t + ' in Table 2 of article.</a>';
+						} else {
+							item += '<br/><a href="' + entry.gsx$url.$t + '"  target="_blank">See ' + entry.gsx$place.$t + ' in article.</a>';
+						}
+					}
+					/*if (entry.gsx$customdata.$t) {	
+						myitem.dataset.custom = entry.gsx$customdata.$t;
+					}	*/
+					if (entry.gsx$defaultdata.$t) {	
+						myitem.dataset.default = entry.gsx$defaultdata.$t;
+						myitem.dataset.custom = entry.gsx$defaultdata.$t;
+					}			
+					var setval = "";
+					if (myitem.dataset.custom) {
+						setval = myitem.dataset.custom;
+					} else {
+						setval = myitem.dataset.default;
+						myitem.dataset.custom = myitem.dataset.default;
+					}
+					if (entry.gsx$edit1.$t) {	
+						if (entry.gsx$style.$t=="Passume") {
+							var promptstr = "Change assumption:";
+						} else {
+							var promptstr = "Change value used:";
+						}
+						item += '<br/><br/><div id="' + entry.gsx$key.$t + 'Edit" class="edit">' + promptstr + '<br/>' + entry.gsx$edit1.$t + setval + entry.gsx$edit2.$t + ' <button id="' + entry.gsx$key.$t + 'EditGo" type="button" class="assmpbutton"  onclick="UpdateResults(\'' + entry.gsx$id.$t + '\');"> Go </button></div>'
+						
+					}
+					
+					if (jQuery('#' + entry.gsx$key.$t).length>0) {
+						new Tip(entry.gsx$key.$t, item, {
+						  title: entry.gsx$citation.$t,
+						  style: entry.gsx$style.$t,
+						  stem: 'bottomLeft',
+						  target: document.getElementById(entry.gsx$key.$t)
+						});
+						if (document.getElementById(entry.gsx$id.$t + "Chart")) {document.getElementById(entry.gsx$id.$t + "Chart").dataset.tooltipsrendered="1"};
+					} else {
+						alert(entry.gsx$key.$t + ' not found!')
+					}
+				});
+				jQuery.getScript("./qacharts/NumNeuronsChart.js"); // first chart, show it right away
+			});
+			
+			
+		var chart;
+		
+		} catch (err) {
+			txt = 'Error!\n';
+			txt += err.name + ': ' + err.message + '\n';
+			txt += err.fileName + ': ' + err.lineNumber;
+			alert(txt)
+		};
+		}
+
+var flag=0;
+	
+</script>
+        <!--p id="copy">This graphic built using HighGraphs</p-->
+</html>
