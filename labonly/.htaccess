@@ -1,0 +1,7 @@
+# Begin password protection #
+AuthName "Protected Area"
+Require valid-user
+AuthUserFile "/home/users/web/b693/moo.ivanlab/labonly/.htpasswd"
+AuthType basic
+# End password protection #
+

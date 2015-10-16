@@ -1,0 +1,173 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="robots" content="noarchive" />
+<title>Soltesz Lab Computer Modeling</title>
+<style type="text/css">
+
+.container {
+	width: 960px;
+	background: #FFF;
+	margin: 0 auto; /* the auto value on the sides, coupled with the width, centers the layout */
+}
+
+div.header {
+	font: 200%/1.4 Verdana, Arial, Helvetica, sans-serif;
+	color: #002469;
+	background-color:#FAE051;
+}
+
+body {
+	font: 100%/1.4 Verdana, Arial, Helvetica, sans-serif;
+	background: white;
+	margin: 0;
+	padding: 0;
+	color: #000;
+}
+
+img
+{  border-style: none;
+}
+
+td.smheader {
+	font: 85%/1.4 Verdana, Arial, Helvetica, sans-serif;
+	margin: 0;
+	padding: 0;
+	color: #002469;
+}
+
+table.tablehead {
+ 	align: "left"
+	margin-bottom: 0px;
+	padding-bottom: 0px;
+	border-color: #FAE051
+}
+div.sidebar1 {
+	float: left;
+	width: 180px;
+	padding-top: 20px;
+	margin: 0px;
+	background-color: #FFF;
+	color: 002469;
+	text-align: left;
+	vertical-align:middle;
+	text-decoration:none;
+}
+table.nav {
+	color: #002469;
+	text-align:left;
+	width: 180px
+}
+table.nav td{
+	color: #002469;
+	text-align:left;
+	border: 1px solid #666; 
+	width: 180px
+}
+table.nav a, table.nav a:visited { 
+	padding: 5px 0px 5px 0px;
+	display: block; /*entire area to react to click. */
+	width: 180px;
+	text-decoration: none;
+	background-color: white;
+	color: #002469;
+}
+
+table.nav a:hover, table.nav a:active, table.nav a:focus {
+	background: #FAE051;
+	color: #002469;
+}
+.footer {
+	padding: 5px;
+	background: #CCC49F;
+	position: relative;/* this gives IE6 hasLayout to properly clear */
+	clear: both; /* this clear property forces the .container to understand where the columns end and contain them */
+}
+
+.text {
+	width: 640px;
+	float: left;
+	margin: 10px;
+	padding: 10px;
+}</style>
+</head>
+
+<body class="container">
+<div class="header">
+<table class="tablehead"><tr valign="bottom">
+  <td rowspan="2"width="180"><a target="_blank" href="http://www.uci.edu"> <img src="images/uci_seal_solid.jpg"  alt="UCI" width="158" height="158" bgcolor="FAE051"/></a></td><td height="88" width=640>The Soltesz Lab</td></tr><tr valign="middle">
+<td class="smheader">Computer Modeling</td></tr></table></div>
+
+<div class="sidebar1">
+    <table class="nav">
+      <tr><td><a href="index.html">Home</a></td></tr>
+      <tr><td><a href="research.html">Research</a></td></tr>
+      <tr><td><a href="people.html">People</a></td></tr>
+      <tr><td><a href="publications.html">Publications</a></td></tr>
+      <tr><td><a href="programs.html">Related Programs</a></td></tr>
+      <tr><td><a href="modeling.html">Computer Modeling</a></td></tr>
+      <tr><td><a href="quantitativeassessment.html">Quantitative Assessment</a></td></tr>
+      <tr><td><a href="./labonly/labonly.html">Lab Only</a></td></tr>
+      <tr><td><a href="http://www.anatomy.uci.edu/soltesz.html">Department Site</a></td></tr>
+      <tr><td><a href="contactus.html">Contact Us</a></td></tr>
+    </table></div>
+
+<div class="text"> <p>
+ <h3>Our models</h3>
+  <ul><li><a href="models/dentate.html">dentate: a scaleable 50,000 neuron rat dentate gyrus model</a></li>
+  <li><a href="models/superdeep.html">superdeep: a mouse CA1 microcircuit model</a></li></ul>
+
+Interested in starting your own detailed modeling project? Here are some resources to help you:</p>
+ <h3>Books</h3>
+  <ul><li>The NEURON book, by Ted Carnevale and Michael Hines (2005)</li>
+  <li>Computer Modeling in Epilepsy, edited by Ivan Soltesz and Kevin Staley (2008)</li>
+  <li>Fundamentals of Computational Neuroscience, by Thomas Trappenberg (2010)</li></ul>
+<h3>Articles</h3>
+In addition to our many modeling articles listed under <a href="publications.html" target="_blank">Publications</a>, here are a few of the key articles from other labs:
+ <ul><li>M.L. Hines, N.T. Carnevale. Translating network models to parallel hardware in NEURON
+Journal of Neurosci. Methods, 169:425-455, 2008
+</li>
+ <li>Brette, R., et al. Simulation of networks of spiking neurons: a review of tools and strategies. J. Comput. Neurosci. 23:349-398, 2007.</li></ul>
+ <!-- p>We have a series of interactive tutorial worksheets available to describe each aspect of our model. The worksheets are available at <a href="https://nn.med.yale.edu:8000/pub/" target="_blank">NEURON's worksheet site</a>. If you are new to NEURON, we recommend starting with Tom McTavish's worksheets. Note that all of these worksheets use Python as the NEURON interpreter (as opposed to hoc). While either interpreter is fine, be aware that the syntax used in the hoc interpreter will be somewhat different than the syntax used in these worksheets. </p -->
+ <h3>Supercomputers (for large networks)</h3>
+Run much larger models and/or run many simulations much more efficiently using parallel NEURON on a supercomputer. Some supercomputers that work well with NEURON are:
+<ul><li><a href="http://www.neuron.yale.edu/phpbb/viewtopic.php?f=6&t=2781" target="_blank">Stampede</a></li>
+<li>Trestles (either <a href="http://www.neuron.yale.edu/phpbb/viewtopic.php?f=6&t=2792" target="_blank">your own allocation</a> or via the <a href="http://www.nsgportal.org/" target="_blank">Neuroscience Gateway</a>)</li></ul><br/>
+
+ <h3>Simulator Resources</h3>
+ <ul><li><a href="http://www.neuron.yale.edu/neuron/" target="_blank">NEURON</a> (the <a href="http://www.neuron.yale.edu/phpBB/" target="_blank">NEURON forum</a> is also a great resource)</li><li><a href="http://genesis-sim.org/" target="_blank">GENESIS</a></li></ul>
+<h3>Other Modeling Tools</h3>
+ <ul><li><a href="http://www.neuroconstruct.org/" target="_blank">NeuroConstruct</a> is a visualization and model development tool, which also enables people to create models intuitively without writing model source code</li>
+<li><a href="http://senselab.med.yale.edu/modeldb/" target="_blank">ModelDB </a> is a database of freely available models that includes many NEURON models</li>
+<li><a href="https://senselab.med.yale.edu/SimToolDB/" target="_blank">SimToolDB </a> is a database of freely available simulation tools useful for a variety of simulators</li>
+<li><a href="http://neuromorpho.org/" target="_blank">NeuroMorpho </a> is a database of cell morphologies in a format that can be imported to NEURON</li>
+<li><a href="http://www.neuroml.org/index.php" target="_blank">NeuroML </a> is a movement to standardize model descriptions using XML, and has a site to <a href="http://morphml.org:8080/NeuroMLValidator/" target="_blank">validate the NeuroML translation</a> of a model</li>
+</ul>
+</div>
+
+  <div class="footer">
+    <p>Email the <a href="mailto:ivansolteszlab@gmail.com">webmaster</a> for site feedback. Page last updated: 
+      <!-- #BeginDate format:Am1 -->November 17, 2010<!-- #EndDate -->
+    </p>
+	   <h4> &copy; 2009 &nbsp;&nbsp; All rights reserved.  </h4>
+  <!-- end .footer --></div>
+
+
+</body>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-37572135-1']);
+  _gaq.push(['_setDomainName', 'ivansolteszlab.org']);
+  _gaq.push(['_setAllowLinker', true]);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+</html>

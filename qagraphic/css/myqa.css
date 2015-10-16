@@ -1,0 +1,215 @@
+html, body {
+    height: 100%;
+    margin: 1px;
+    padding: 1px;
+}
+.cardholder {
+	overflow-x: scroll;
+	overflow:auto;
+}
+.ui-dialog{
+position:absolute;
+top:70px;
+left:600px;
+z-index:103;
+}
+.dialog_style1{
+	font-family: "Lucida Grande","Lucida Sans Unicode",Verdana,Arial,Helvetica,sans-serif;
+	font-size: 12px;
+}
+.dialog_style1 .ui-dialog-titlebar { display:none; }
+.dialog_style1 .ui-dialog-content { height:80px; }
+.dialog_style1 .ui-dialog-buttonpane {
+	display:table;
+	font-family: "Lucida Grande","Lucida Sans Unicode",Verdana,Arial,Helvetica,sans-serif;
+}
+.ui-widget-overlay{
+	z-index:102;
+}
+.selstyle {
+	font-family: "Lucida Grande","Lucida Sans Unicode",Verdana,Arial,Helvetica,sans-serif;
+	font-size: 16px;
+}
+.miscbutton {
+	font-family: "Lucida Grande","Lucida Sans Unicode",Verdana,Arial,Helvetica,sans-serif;
+	float: right;
+	width:120px;
+	height:25px;
+	font-size: 11px;
+	padding: 0px;
+	margin: -3px;
+}
+.helpbutton {
+	font-family: "Lucida Grande","Lucida Sans Unicode",Verdana,Arial,Helvetica,sans-serif;
+	width:120px;
+	height:25px;
+	font-size: 11px;
+	padding: 0px;
+	margin: -3px;
+	margin-left: 5px;
+	background: LightBlue;
+	border:1px solid blue;
+	cursor: pointer;
+	//color: blue;
+	height: 20px;
+	font-size: 10px;
+}
+table.example2 {background-color:transparent;border-collapse:collapse;width:100%;}
+table.example2 th, table.example2 td {text-align:center;border:1px solid black;padding-right:3px;}
+table.example2 td {width:14%;text-align:right}
+table.example2 td:first-child {width:30%;text-align:left}
+tr.cellclass {background: LightGreen;}
+
+.allotherholderWIDE {
+	width: 100%;
+	float: left;
+	display: compact;
+    height: 100%;
+	margin: 0px; /* the auto value on the sides, coupled with the width, centers the layout */
+	padding: 0px; /* the auto value on the sides, coupled with the width, centers the layout */
+	border-right: 2px solid gray;
+}
+
+.allotherholderNARROW {
+	width: 65%;
+	float: left;
+	display: compact;
+    height: 100%;
+	margin: 0px; /* the auto value on the sides, coupled with the width, centers the layout */
+	padding: 0px; /* the auto value on the sides, coupled with the width, centers the layout */
+	border-right: 2px solid gray;
+}
+.resultsholder {
+	font-family: "Lucida Grande","Lucida Sans Unicode",Verdana,Arial,Helvetica,sans-serif;
+	font-size: 12px;
+	width: 34.5%;
+	float: right;
+	display: block;
+    height: 100%;
+	margin: 0px; /* the auto value on the sides, coupled with the width, centers the layout */
+	padding: 0px; /* the auto value on the sides, coupled with the width, centers the layout */
+}
+.card {
+	width: 250px;
+	height: 470px;
+	/*background: #FFF;*/
+	border:1px solid blue;
+	border-radius:5px;
+	//box-shadow: 7px 7px 4px #888888;
+	font-family: "Lucida Grande","Lucida Sans Unicode",Verdana,Arial,Helvetica,sans-serif;
+	font-size: 12px;
+	display: none;
+	vertical-align: top;
+}
+.instructions {
+	font-family: "Lucida Grande","Lucida Sans Unicode",Verdana,Arial,Helvetica,sans-serif;
+	font-size: 12px;
+	background: #E6E6FA;
+    margin: 5px;
+    padding: 3px;
+}
+.navbutton {
+	background: #FFFF99;
+	border:1px solid orange;
+	color: orange;
+	width: 30px;
+	height: 30px;
+    margin-left: auto; 
+    margin-right: auto;
+
+    text-align: justify;
+    -ms-text-justify: distribute-all-lines;
+    text-justify: distribute-all-lines;
+}
+.assmpbutton {
+	background: LightBlue;
+	border:1px solid blue;
+	color: blue;
+	height: 20px;
+	font-size: 10px;
+}
+.chart {
+	width: 250px;
+	height: 300px;
+	border-radius:0px;
+	border-top-left-radius:5px;
+	border-top-right-radius:5px;
+	/*background: #FFF;*/
+	margin: 0 auto; /* the auto value on the sides, coupled with the width, centers the layout */
+}
+.sectionheader {
+	width: 250px;
+	height: 20px;
+	background: LightGray;
+	text-align: center;
+	border:none;
+	border-radius:0px;
+	border-top-left-radius:5px;
+	border-top-right-radius:5px;
+	/*background: #FFF;*/
+	margin: 0 auto; /* the auto value on the sides, coupled with the width, centers the layout */
+}
+.emphme {
+	font-size: 14px;
+}
+.assume {
+	height: 20px;
+	border:1px solid #FFFF00;
+	border-radius:2px;
+	background: #FFFF99;
+	color:black;
+	cursor: pointer;
+	font-family: "Lucida Grande","Lucida Sans Unicode",Verdana,Arial,Helvetica,sans-serif;
+	font-size: 12px;
+	display: inline-block;
+	/*margin: 0 auto; /* the auto value on the sides, coupled with the width, centers the layout */
+	margin-right: 1px; /* the auto value on the sides, coupled with the width, centers the layout */
+	margin: 1px; /* the auto value on the sides, coupled with the width, centers the layout */
+	padding-left: 2px; /* the auto value on the sides, coupled with the width, centers the layout */
+	padding-right: 2px; /* the auto value on the sides, coupled with the width, centers the layout */
+}
+.observe {
+	height: 20px;
+	border:1px solid #CCFF00;
+	border-radius:2px;
+	background: #CCFF99;
+	color:black;
+	cursor: pointer;
+	font-family: "Lucida Grande","Lucida Sans Unicode",Verdana,Arial,Helvetica,sans-serif;
+	font-size: 12px;
+	display: inline-block;
+	/*margin: 0 auto; /* the auto value on the sides, coupled with the width, centers the layout */
+	margin-right: 1px; /* the auto value on the sides, coupled with the width, centers the layout */
+	margin: 1px; /* the auto value on the sides, coupled with the width, centers the layout */
+	padding-left: 2px; /* the auto value on the sides, coupled with the width, centers the layout */
+	padding-right: 2px; /* the auto value on the sides, coupled with the width, centers the layout */
+}
+/*.edit {
+	width: 100px;
+	height: 100px;
+	border-radius:0px;
+	background: #FFF;
+}*/
+.nav {
+	width: 250px;
+	height: 50px;
+	border-bottom:1px solid blue;
+	/*border-left:1px solid blue;
+	border-right:1px solid blue;*/
+	background: #FFF;
+	border-radius:5px;
+	border-top-left-radius:0px;
+	border-top-right-radius:0px;
+	margin: 0 auto; /* the auto value on the sides, coupled with the width, centers the layout */
+    display: table;
+    width: 100%;
+    table-layout: fixed;    /* For cells of equal size */
+}
+.nav span {
+    display: table-cell;
+    text-align: center;
+}
+.ui-widget-content {
+    border: 2px solid #DDD;
+	background: White;
+}

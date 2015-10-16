@@ -1,0 +1,178 @@
+var CRnVIPpSLMCellsFCN = function() {	
+	try {
+	var myKey = "CRnVIPpSLMCOUPFact";
+	if (document.getElementById(myKey + "Input")) {
+		document.getElementById(myKey).dataset.custom = document.getElementById(myKey + "Input").value;
+	}	
+	CRnVIPpoverlapCOUPTFII = 1.00; //parseFloat(((document.getElementById(myKey).dataset.custom)/100).toFixed(2)); 
+	var COUPTFIIoverlapCRnVIPp = .03;
+	window.CRnVIPplacmol = Math.round(window.COUPcells*.29*COUPTFIIoverlapCRnVIPp/CRnVIPpoverlapCOUPTFII);
+	window.is1_SLM = Math.round(window.CRnVIPplacmol/10)*10;
+
+	
+	if (document.getElementById("CRnVIPpSLMCellsChart") && document.getElementById("CRnVIPpSLMCells").style.display!="hidden" && document.getElementById("CRnVIPpSLMCells").style.display!="none") {
+	jQuery('#CRnVIPpSLMCellsChart').highcharts({
+    chart: {
+        renderTo:'container',
+        type:'scatter'
+    },
+    title:{
+        text:'CR-/VIP+ Cells in<br/>S. Lac.Mol. (SLM)'
+    },
+    credits:{enabled:false},
+    legend:{
+			enabled: true,
+			layout: 'vertical',
+			align: 'center',
+			width: 220,
+			verticalAlign: 'bottom',
+			borderWidth: 0,
+			useHTML: true,
+			labelFormatter: function() {
+				return '<div style="width:200px"><span style="float:left">' + this.name + '</span><span style="float:right">' + this.options.label + '</span></div>';
+			} //,
+	},
+    plotOptions: {
+        series: {
+            shadow:false,
+            borderWidth:0,
+            marker:{
+                symbol:'circle'
+            }                            
+        }
+    },
+    xAxis:{
+        min:0,
+        max:100,
+        lineWidth:0,
+        gridLineWidth:0,
+        title:{text:''},
+        labels:{enabled:false}
+    },
+    yAxis:{
+        min:0,
+        max:100,
+        lineWidth:0,
+        gridLineWidth:0,
+        title:{text:''},
+        labels:{enabled:false}
+    },  
+	tooltip:{
+		crosshairs: false,
+			headerFormat: '<b>{series.name}</b>',
+			pointFormat: '<br />{point.z} cells<br/>'
+	},
+    series: [	{
+       color:'rgba(241,90,96,.5)',
+       name:'CR-/VIP+ (IS II) SLM cells',
+       label:Math.round(window.CRnVIPplacmol/10)*10,
+       data: [{
+           x:55,
+           y:50,
+		   z:Math.round(window.CRnVIPplacmol/10)*10,
+           marker:{
+               radius:Math.sqrt(Math.round(window.CRnVIPplacmol/10)*10/(Math.round(window.COUPcells*.29/10)*10+Math.round(window.CRnVIPplacmol/10)*10)*2000),
+               fillColor:'rgba(241,90,96,.5)',
+               lineColor:'rgba(241,90,96,.75)',
+               lineWidth:1,
+               states:{
+                   hover:{
+               radius:Math.sqrt(Math.round(window.CRnVIPplacmol/10)*10/(Math.round(window.COUPcells*.29/10)*10+Math.round(window.CRnVIPplacmol/10)*10)*2000),
+                fillColor:'rgba(241,90,96,.5)',
+               lineColor:'rgba(241,90,96,.75)',
+               lineWidth:1
+                  }
+               }
+           }
+       }]
+    },
+	{
+        color:'rgba(90,155,212,.5)',
+        name:'COUP-TFII+ SLM cells',
+        label:Math.round(window.COUPcells*.29/10)*10,
+        data: [{
+           x:45,
+            y:50,
+			z:Math.round(window.COUPcells*.29/10)*10,
+            marker:{
+               radius:Math.sqrt(Math.round(window.COUPcells*.29/10)*10/(Math.round(window.COUPcells*.29/10)*10+Math.round(window.CRnVIPplacmol/10)*10)*2000),
+                fillColor:'rgba(90,155,212,.5)',
+                lineColor:'rgba(90,155,212,.75)',
+                lineWidth:1,
+                states:{
+                    hover:{
+               radius:Math.sqrt(Math.round(window.COUPcells*.29/10)*10/(Math.round(window.COUPcells*.29/10)*10+Math.round(window.CRnVIPplacmol/10)*10)*2000),
+                 fillColor:'rgba(90,155,212,.5)',
+                lineColor:'rgba(90,155,212,.75)',
+                lineWidth:1
+                   }
+                }
+            }
+        }]
+    },
+	{
+        color:'rgba(212,0,212,.5)',
+        name:'COUP-TFII+/<br/>CR-/VIP+ SLM cells',
+        label:Math.round(window.COUPcells*.29*COUPTFIIoverlapCRnVIPp/10)*10,
+        data: [{
+  		   label:'COUP-TFII+/<br/>CR-/VIP+ SLM cells',
+           x:44,
+            y:50,
+			z:Math.round(window.COUPcells*.29*COUPTFIIoverlapCRnVIPp/10)*10,
+                zIndex: 6,
+            marker:{
+                radius:35,
+               fillColor:'rgba(212,0,212,0)',
+                lineColor:'rgba(212,0,212,0)',
+                lineWidth:0,
+                states:{
+                    hover:{
+                        radius:35,
+						   fillColor:'rgba(212,0,212,0)',
+							lineColor:'rgba(212,0,212,0)',
+							lineWidth:0
+					}
+                }
+            }
+        }]
+    }]
+   }, function(chart) {
+        
+        var point = chart.series[0].data[8];
+ // Highcharts.setOptions({
+ // colors: ['#50B432', '#ED561B', '#DDDF00', '#24CBE5', '#64E572', '#FF9655', '#FFF263', '#6AF9C4']
+ // });       
+        var textLeft = chart.renderer.text(
+                COUPTFIIoverlapCRnVIPp*100 + '%', 
+				35 + chart.plotLeft,
+				20 + chart.plotTop
+
+            ).attr({
+			fill:'rgba(90,155,212,1)',
+                zIndex: 5
+            }).css({fontSize: '14px', fontWeight: 'bold'})
+			.add();
+        
+        var textRight = chart.renderer.text(
+                CRnVIPpoverlapCOUPTFII*100 + '%', 
+				190 + chart.plotLeft,
+				20 + chart.plotTop
+            ).attr({
+			fill:'rgba(241,90,96,1)',
+                zIndex: 5
+            }).css({fontSize: '14px', fontWeight: 'bold'})
+			.add();
+       
+		});  
+	}
+	} catch(err) {
+	txt = 'Error!\n';
+	txt += err.name + ': ' + err.message + '\n';
+	txt += err.fileName + ': ' + err.lineNumber;
+	alert(txt)
+	};
+	CRpVIPpSPCellsFCN();
+};
+$(function () {	
+CRnVIPpSLMCellsFCN();		
+})(jQuery); 
